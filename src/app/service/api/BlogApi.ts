@@ -53,11 +53,7 @@ export class BlogApi {
    * @summary Get Blog
    */
   public apiV1BlogGetUsingGET(extraHttpRequestParams?: any): Observable<BlogDTO> {
-    const requestOptions: any = {
-      method: 'GET',
-      withCredentials: this.configuration.withCredentials
-    };
-    return this.http.get<BlogDTO>(this.blogPath, requestOptions);
+    return this.http.get<BlogDTO>(this.blogPath);
   }
 
   /**
@@ -73,12 +69,8 @@ export class BlogApi {
       throw new Error('Required parameter blogEdit was null or undefined when calling apiV1BlogPostUsingPOST.');
     }
     headers = headers.set('Content-Type', 'application/json');
-
-    const requestOptions: any = {
-      headers: headers,
-      withCredentials: this.configuration.withCredentials
-    };
-    return this.http.post<BlogDTO>(this.blogPath, blogEdit, requestOptions);
+    return this.http.post<BlogDTO>(this.blogPath, blogEdit,
+      {headers: headers, withCredentials: this.configuration.withCredentials});
   }
 
   /**

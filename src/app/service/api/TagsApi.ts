@@ -54,11 +54,8 @@ export class TagsApi {
       throw new Error('Required parameter tagEdit was null or undefined when calling apiV1TagsPostUsingPOST.');
     }
     headers = headers.set('Content-Type', 'application/json');
-    const requestOptions: any = {
-      headers: headers,
-      withCredentials: this.configuration.withCredentials
-    };
-    return this.http.post(this.tagsPath, tagEdit, requestOptions);
+    return this.http.post<TagDTO>(this.tagsPath, tagEdit, {headers: headers,
+      withCredentials: this.configuration.withCredentials});
   }
 
   /**

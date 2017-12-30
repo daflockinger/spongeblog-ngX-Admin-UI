@@ -90,11 +90,8 @@ export class UsersApi {
       throw new Error('Required parameter userEdit was null or undefined when calling apiV1UsersPostUsingPOST.');
     }
     headers = headers.set('Content-Type', 'application/json');
-    const requestOptions: any = {
-      headers: headers,
-      withCredentials: this.configuration.withCredentials
-    };
-    return this.http.post(this.userPath, userEdit, requestOptions);
+    return this.http.post<UserEditDTO>(this.userPath, userEdit, {headers: headers,
+      withCredentials: this.configuration.withCredentials});
   }
 
   /**
@@ -173,10 +170,7 @@ export class UsersApi {
     if (userId === null || userId === undefined) {
       throw new Error('Required parameter userId was null or undefined when calling apiV1UsersUserIdGetUsingGET.');
     }
-    const requestOptions: any = {
-      headers: headers,
-      withCredentials: this.configuration.withCredentials
-    };
-    return this.http.get<UserEditDTO>(path, requestOptions);
+    return this.http.get<UserEditDTO>(path, {headers: headers,
+      withCredentials: this.configuration.withCredentials});
   }
 }

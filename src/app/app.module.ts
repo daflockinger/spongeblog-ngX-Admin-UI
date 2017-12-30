@@ -10,7 +10,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 import { LocalStorageModule } from 'angular-2-local-storage';
-import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
 
 import { AppComponent } from './app.component';
 import { MaterializeModule } from 'angular2-materialize';
@@ -56,7 +55,6 @@ import { PageComponent } from './page/page.component';
     BlogRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SlimLoadingBarModule.forRoot(),
     LocalStorageModule.withConfig({
             prefix: 'spongeblog',
             storageType: 'localStorage'

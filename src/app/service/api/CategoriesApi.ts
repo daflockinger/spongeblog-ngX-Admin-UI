@@ -64,11 +64,8 @@ export class CategoriesApi {
     if (categoryId === null || categoryId === undefined) {
       throw new Error('Required parameter categoryId was null or undefined when calling apiV1CategoriesCategoryIdGetUsingGET.');
     }
-    const requestOptions: any = {
-      headers: headers,
-      withCredentials: this.configuration.withCredentials
-    };
-    return this.http.get<CategoryDTO>(path, requestOptions);
+    return this.http.get<CategoryDTO>(path,
+      {headers: headers, withCredentials: this.configuration.withCredentials});
   }
 
   /**
@@ -91,7 +88,7 @@ export class CategoriesApi {
    * @summary All Categorys
    */
   public apiV1CategoriesGetUsingGET(extraHttpRequestParams?: any): Observable<Array<CategoryDTO>> {
-    return this.http.get(this.categoryPath);
+    return this.http.get<Array<CategoryDTO>>(this.categoryPath);
   }
 
   /**
@@ -107,12 +104,8 @@ export class CategoriesApi {
       throw new Error('Required parameter categoryEdit was null or undefined when calling apiV1CategoriesPostUsingPOST.');
     }
     headers = headers.set('Content-Type', 'application/json');
-
-    const requestOptions: any = {
-      headers: headers,
-      withCredentials: this.configuration.withCredentials
-    };
-    return this.http.post(this.categoryPath, categoryEdit, requestOptions);
+    return this.http.post<CategoryDTO>(this.categoryPath, categoryEdit,
+      {headers: headers, withCredentials: this.configuration.withCredentials});
   }
 
   /**
