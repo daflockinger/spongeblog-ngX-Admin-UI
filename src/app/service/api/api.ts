@@ -1,0 +1,13 @@
+export * from './BlogApi';
+import { BlogApi } from './BlogApi';
+export * from './CategoriesApi';
+import { CategoriesApi } from './CategoriesApi';
+export * from './PostsApi';
+import { PostsApi } from './PostsApi';
+export * from './TagsApi';
+import { TagsApi } from './TagsApi';
+export * from './UsersApi';
+import { UsersApi } from './UsersApi';
+export * from './PagesApi';
+import {PagesApi} from './PagesApi';
+export const APIS = [BlogApi, CategoriesApi, PostsApi, TagsApi, UsersApi, PagesApi];

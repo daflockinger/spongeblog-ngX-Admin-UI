@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+
+
+<!-- CONTENT-HEADER -->
+<div class="parallax-container" *ngIf="blog">
+      <div class="parallax" materialize="parallax"></div>
+       <div class="row blog-header">
+        <div class="col s12 m12 l12 center-align">
+        <h1 class="header center white-text">{{blog.settings['title']}}</h1>
+          <h5 class="header col s12 white-text">{{blog.settings['subtitle']}}</h5>
+        </div>
+      </div>
+</div>
+<!-- CONTENT-HEADER -->
+
+<main>
+<div class="container center" *ngIf="page">
+
+<div class="row left-align" *ngFor="let post of page.previewPosts">
+  <div class="col s12 m12 l12">
+    <div class="card">
+            <div class="card-content">
+              <span class="card-title"><a [routerLink]="createPostLink(post)"><h4>{{post.title}}</h4></a></span>
+              <p>
+              	<a [routerLink]="createUserLink(post)">{{post.author.nickName}}</a>  / {{post.created | date}}
+              		<span *ngFor="let tag of post.tags">
+              			<div class="chip"><a [routerLink]="createTagLink(tag)">{{tag.name}}</a></div>
+              		</span>
+              </p>
+            </div>
+            <div class="card-content">
+                <p [innerHTML]="post.partContent"></p>
+            </div>
+            <div class="card-action">
+              <a [routerLink]="createPostLink(post)">Read more...</a>
+            </div>
+    </div>
+  </div>
+</div>
+<!-- CONTENT -->
+
+<!-- PAGINATION -->
+<app-pagination *ngIf="page" [page]="page" [currentPage]="currentPage" [path]="path"></app-pagination>

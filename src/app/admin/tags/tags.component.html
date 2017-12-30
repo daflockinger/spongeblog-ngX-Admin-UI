@@ -1,0 +1,57 @@
+<app-admin-navbar></app-admin-navbar>
+
+
+<div class="container center-align">
+  <div class="row">
+    <div class="col s12">
+      <h2>Tags</h2>
+    </div>
+  </div>
+    <div class="row">
+      <div class="card col s12 m8 offset-m2 l8 offset-l2">
+        <form *ngIf="tagForm" [formGroup]="tagForm">
+        <table materialize [materializeActions]="toaster">
+        <thead>
+          <tr>
+            <th data-field="name">Tag-Name</th>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody formArrayName="tagGroups">
+          <tr *ngFor="let tag of tagGroups.controls; let tagIndex=index" [formGroupName]="[tagIndex]">
+            <td>
+              <div class="input-field col s6">
+				<input type="text" formControlName="name" class={{statusClass(tag.controls.name)}}/>
+         <div *ngIf="tag.controls.name.invalid && (tag.controls.name.dirty || tag.controls.name.touched)" class="invalid">
+          <div *ngIf="tag.controls.name.errors.required" class="red-text">Tag name must not be empty!</div>
+         </div>
+			</div>
+            </td>
+            <td *ngIf="!tag.value.tagId">
+              <button class="btn waves-effect waves-light" type="submit"
+              (click)="insertTag(tag)">
+                <i class="fa fa-plus" aria-hidden="true" title="Add"></i>
+              </button>
+            </td>
+            <td *ngIf="tag.value.tagId">
+              <button class="btn waves-effect waves-light" type="submit"
+              (click)="updateTag(tag)">
+                <i class="fa fa-save " aria-hidden="true"  title="Save"></i>
+              </button>
+            </td>
+            <td *ngIf="tag.value.tagId">
+              <button class="btn waves-effect waves-light tag-delete" type="submit"
+              (click)="deleteTag(tag.value.tagId)">
+                <i class="fa fa-trash " aria-hidden="true"  title="Remove"></i>
+              </button>
+            </td>
+            <td></td>
+            <input type="hidden" *ngIf="tag.value.tagId" formControlName="tagId" />
+
+          </tr>
+      </tbody>
+      </table>
+      </form>
+    </div>
+  </div>
+</div>

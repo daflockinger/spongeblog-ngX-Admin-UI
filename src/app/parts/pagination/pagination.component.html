@@ -1,0 +1,23 @@
+  <ul class="pagination">
+    <li [class.disabled]="!page.hasPrevious">
+      <a *ngIf="page.hasPrevious" [routerLink]="getType() + (currentPage - 1)">
+        <i class="material-icons">chevron_left</i>
+      </a>
+       <a *ngIf="!page.hasPrevious">
+        <i class="material-icons">chevron_left</i>
+      </a>
+    </li>
+
+    <li [class.active]="isCurrentPage(page)" *ngFor="let page of pages">
+      <a [routerLink]="getType() + page">{{page}}</a>
+    </li>
+
+    <li [class.disabled]="!page.hasNext">
+      <a *ngIf="page.hasNext" [routerLink]="getType() + (currentPage + 1)">
+        <i class="material-icons">chevron_right</i>
+      </a>
+      <a *ngIf="!page.hasNext">
+        <i class="material-icons">chevron_right</i>
+      </a>
+    </li>
+  </ul>

@@ -1,0 +1,34 @@
+<footer class="page-footer grey" *ngIf="blog">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Social:</h5>
+                  <h5>
+                  <span *ngIf="blog.settings['socialTwitter']"><a href="{{blog.settings['socialTwitter']}}"><i fa [name]="'twitter'"></i></a></span>
+                  <span *ngIf="blog.settings['socialFacebook']"><a href="{{blog.settings['socialFacebook']}}"><i fa [name]="'facebook'"></i></a></span>
+                  <span *ngIf="blog.settings['socialInstagram']"><a href="{{blog.settings['socialInstagram']}}"><i fa [name]="'instagram'"></i></a></span>
+                  <span *ngIf="blog.settings['socialReddit']"><a href="{{blog.settings['socialReddit']}}"><i fa [name]="'reddit-alien'"></i></a></span>
+                  <span *ngIf="blog.settings['socialGoogle']"><a href="{{blog.settings['socialGoogle']}}"><i fa [name]="'google-plus'"></i></a></span>
+                  <span *ngIf="blog.settings['socialYoutube']"><a href="{{blog.settings['socialYoutube']}}"><i fa [name]="'youtube-play'"></i></a></span>
+                  </h5>
+              </div>
+              <div class="col l6 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li *ngFor="let link of footerLinks">
+                    <a class="grey-text text-lighten-3"
+                    [routerLink]="createFooterLink(link)">{{link.name}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright grey darken-1">
+            <div class="container">
+              <div class="row">
+                  <div class=" col s12 m12 l12">© {{blog.settings['copyright']}}
+                </div>
+              </div>
+            </div>
+          </div>
+</footer>

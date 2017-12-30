@@ -1,0 +1,82 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container center-align">
+  <div class="row">
+    <div class="col s12">
+      <h2>Categories</h2>
+    </div>
+  </div>
+    <div class="row">
+      <div class="card col s12 m12 l12">
+        <form *ngIf="categoriesForm" [formGroup]="categoriesForm">
+        <table materialize [materializeActions]="toaster">
+        <thead>
+          <tr>
+            <th data-field="name">Name</th>
+            <th data-field="parent">Parent</th>
+            <th data-field="rank">Rank</th>
+            <th data-field="pageId">Page ID</th>
+            <td></td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody formArrayName="categoryGroups">
+          <tr *ngFor="let category of categoryGroups.controls; let categoryIndex=index"
+                  [formGroupName]="[categoryIndex]">
+            <td>
+              <div class="input-field col s12">
+				<input type="text" formControlName="name" id="name" name="name" class={{statusClass(category.controls.name)}}/>
+         <div *ngIf="category.controls.name.invalid && (category.controls.name.dirty || category.controls.name.touched)" class="invalid">
+          <div *ngIf="category.controls.name.errors.required" class="red-text">Category name must not be empty!</div>
+         </div>
+			</div>
+			</td>
+			 <td>
+			 <div class="input-field col s12">
+			 	<select materialize="material_select" formControlName="parentId">
+					<option value="null">No Parent</option>
+					<option *ngFor="let parent of parentCategories(category.value.categoryId)"
+              value="{{parent.categoryId}}">{{parent.name}}
+          </option>
+				</select>
+			</div>
+			</td>
+			<td>
+              <div class="input-field col s12">
+				<input type="number" formControlName="rank"/>
+				<input type="hidden" formControlName="categoryId"/>
+			</div>
+            </td>
+            <td>
+                <div class="input-field col s12">
+          <input type="number" formControlName="pageId"/>
+        </div>
+              </td>
+            <td *ngIf="!category.value.categoryId">
+              <button class="btn waves-effect waves-light category-save" type="submit"
+              (click)="insertCategory(category)">
+                <i class="fa fa-plus" aria-hidden="true" title="Add"></i>
+              </button>
+            </td>
+            <td *ngIf="category.value.categoryId">
+              <button class="btn waves-effect waves-light category-save"
+              (click)="updateCategory(category)"
+              type="submit">
+                <i class="fa fa-save " aria-hidden="true"  title="Save"></i>
+              </button>
+            </td>
+            <td *ngIf="category.value.categoryId">
+              <button class="btn waves-effect waves-light category-delete"
+              (click)="deleteCategory(category.value.categoryId)"
+              type="submit">
+                <i class="fa fa-trash " aria-hidden="true"  title="Remove"></i>
+              </button>
+            </td>
+            <td></td>
+          </tr>
+      </tbody>
+      </table>
+        </form>
+    </div>
+  </div>
+</div>

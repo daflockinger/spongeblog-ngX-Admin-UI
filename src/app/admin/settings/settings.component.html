@@ -1,0 +1,142 @@
+<app-admin-navbar></app-admin-navbar>
+
+		<!-- CONTENT -->
+		<div class="container center-align">
+			<div class="row">
+				<div class="col s12">
+					<h2>Blog Settings</h2>
+				</div>
+			</div>
+
+			<form [formGroup]="settingsForm" (ngSubmit)="saveSettings()">
+				<div class="row">
+					<div class="card col s12 m8 offset-m2 l8 offset-l2">
+						<div class="card-content">
+							<span class="card-title">General Settings</span>
+
+
+							<div class="row">
+								<div class="input-field col s12" >
+									<input type="text" formControlName="name" class="{{statusClass('name')}}"
+										id="name" name="name" /> <label for="name"
+                    [class.active]="isNotEmpty('name')">Blog Name</label>
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid">
+                      <div *ngIf="name.errors.required" class="red-text">Blog Name is required.</div>
+                    </div>
+								</div>
+							</div>
+              <div class="row">
+								<div class="input-field col s12">
+									<select name="status" formControlName="status" class="{{statusClass('status')}}"
+                  materialize="material_select">
+										<option value="" disabled="disabled" selected="selected">Choose
+											your option</option>
+										<option *ngFor="let status of statuses" [value]="status">{{status}}</option>
+									</select>
+                  <label>Select Blog Status</label>
+                  <div *ngIf="blogStatus.invalid && (blogStatus.dirty || blogStatus.touched)">
+                      <div *ngIf="blogStatus.errors.required" class="red-text">Blog Status is required.</div>
+                    </div>
+								</div>
+							</div>
+
+              <div formGroupName="settings">
+							<div class="row">
+								<div class="input-field col s12">
+									<input type="text" formControlName="title" class="{{statusClass('settings.title')}}"
+										id="title" name="title" />
+                    <label for="title" [class.active]="isNotEmpty('settings.title')">
+                      Blog Title</label>
+                    <div *ngIf="title.invalid && (title.dirty || title.touched)" class="invalid">
+                      <div *ngIf="title.errors.required" class="red-text">Blog Title is required.</div>
+                    </div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<input type="text" formControlName="subtitle"
+										id="subtitle" name="subtitle" />
+                    <label for="subtitle" [class.active]="isNotEmpty('settings.subtitle')">
+                      Subtitle</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<input type="text" formControlName="bgImage"
+										id="bg-image" name="bg-image" />
+                    <label for="bg-image" [class.active]="isNotEmpty('settings.bgImage')">
+                      Background image URL</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<textarea id="copyright" class="materialize-textarea"
+										formControlName="copyright" name="copyright"></textarea>
+									<label for="copyright" [class.active]="isNotEmpty('settings.copyright')">
+                    Copyright</label>
+								</div>
+							</div>
+              </div>
+
+						</div>
+					</div>
+				</div>
+				<div class="row" formGroupName="settings">
+					<div class="card col s12 m8 offset-m2 l8 offset-l2">
+						<div class="card-content">
+							<span class="card-title">Social</span>
+							<div class="row">
+								<div class="input-field col s12 m6 l6">
+									<input type="text" formControlName="socialTwitter"
+										id="socialTwitter" name="socialTwitter" />
+                    <label for="socialTwitter" [class.active]="isNotEmpty('settings.socialTwitter')">
+                      Twitter link</label>
+								</div>
+								<div class="input-field col s12 m6 l6">
+									<input type="text" formControlName="socialFacebook"
+										id="socialFacebook" name="socialFacebook" />
+									<label for="socialFacebook" [class.active]="isNotEmpty('settings.socialFacebook')">
+                    Facebook link</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m6 l6">
+									<input type="text" formControlName="socialInstagram"
+										id="socialInstagram" name="socialInstagram" />
+									<label for="socialInstagram" [class.active]="isNotEmpty('settings.socialInstagram')">
+                    Instagram link</label>
+								</div>
+								<div class="input-field col s12 m6 l6">
+									<input type="text" formControlName="socialReddit"
+										id="socialReddit" name="socialReddit" /> <label
+										for="socialReddit" [class.active]="isNotEmpty('settings.socialReddit')">
+                    Reddit link</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 m6 l6">
+									<input type="text" formControlName="socialGoogle"
+										id="socialGoogle" name="socialGoogle" /> <label
+										for="socialGoogle" [class.active]="isNotEmpty('settings.socialGoogle')">
+                    Google+ link</label>
+								</div>
+								<div class="input-field col s12 m6 l6">
+									<input type="text" formControlName="socialYoutube"
+										id="socialYoutube" name="socialYoutube" /> <label
+										for="socialYoutube" [class.active]="isNotEmpty('settings.socialYoutube')">
+                    Youtube link</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s4 offset-s4">
+						<button class="btn waves-effect waves-light" type="submit" materialize [materializeActions]="toaster">
+							Save <i class="fa fa-floppy-o right" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- CONTENT -->

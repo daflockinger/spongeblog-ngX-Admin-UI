@@ -1,0 +1,115 @@
+<app-admin-navbar></app-admin-navbar>
+
+
+<div class="container center-align">
+  <div class="row">
+    <div class="col s12">
+      <h2>User Settings</h2>
+    </div>
+  </div>
+  <form *ngIf="userForm" [formGroup]="userForm" materialize>
+  <div class="row">
+    <div class="card col s12 m8 offset-m2 l8 offset-l2">
+      <div class="card-content">
+        <span class="card-title">
+          <div class="input-field col s12">
+            <select (change)="loadUser()" formControlName="userSelection" name="users" materialize="material_select" *ngIf="users">
+              <option value="null" selected="selected">New User</option>
+							<option *ngFor="let user of users" [value]="user.userId">{{user.login}}</option>
+						</select>
+            <label>Select User to edit</label>
+          </div>
+        </span>
+
+        <div class="row" formGroupName="user">
+            <div class="row"  materialize [materializeActions]="toaster">
+              <div class="input-field col s6">
+                <input name="login" type="text" formControlName="login"
+                class="{{statusClass('login')}}"/>
+                <label [class.active]="isNotEmpty('login')"
+                for="login">Login</label>
+                <div *ngIf="userControl('login').invalid && (userControl('login').dirty || userControl('login').touched)" class="invalid">
+                  <div *ngIf="userControl('login').errors.required" class="red-text">Login must not be empty!</div>
+                </div>
+              </div>
+              <div class="input-field col s6">
+                <input type="text" name="nickName" formControlName="nickName"
+                class="{{statusClass('nickName')}}"/>
+                <label [class.active]="isNotEmpty('nickName')"
+                for="nickName">Nick name</label>
+                <div *ngIf="userControl('nickName').invalid && (userControl('nickName').dirty || userControl('nickName').touched)" class="invalid">
+                  <div *ngIf="userControl('nickName').errors.required" class="red-text">Nickname must not be empty!</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input name="password" type="password" formControlName="password"
+                class="{{statusClass('password')}}"/>
+                <label [class.active]="isNotEmpty('password')"
+                for="password">Password</label>
+                <div *ngIf="userControl('password').invalid && (userControl('password').dirty || userControl('password').touched)" class="invalid">
+                  <div *ngIf="userControl('password').errors.required" class="red-text">Password must not be empty!</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+             <div class="col s12 m6 l6">
+                <div class="input-field col s12">
+                <input name="email" type="email" formControlName="email"
+                class="{{statusClass('email')}}"/>
+                <label [class.active]="isNotEmpty('email')"
+                for="email">Email</label>
+                <div *ngIf="userControl('email').invalid && (userControl('email').dirty || userControl('email').touched)" class="invalid">
+                  <div *ngIf="userControl('email').errors.required" class="red-text">Email must not be empty!</div>
+                </div>
+              </div>
+              <div class="input-field col s12" *ngIf="isStoredUser()">
+                <input [disabled]="true" type="text" name="registered"
+                class="{{statusClass('registered')}}"
+                [value]="[formatDate(userControl('registered').value)]"/>
+                <label class="active" for="registered">Registered Date</label>
+                <div *ngIf="userControl('registered').invalid && (userControl('registered').dirty || userControl('registered').touched)" class="invalid">
+                  <div *ngIf="userControl('registered').errors.required" class="red-text">Registration date must not be empty!</div>
+                </div>
+              </div>
+             </div>
+             <div class="col s12 m6 l6">
+              <div class="col s12">
+              <h6 class="left-align">Roles:</h6>
+              </div>
+              <div class="col s12" formArrayName="roles">
+                <p *ngFor="let role of roles.controls; let roleIndex=index" formGroupName="{{roleIndex}}">
+                  <input type="checkbox" formControlName="roleValue" id="role{{roleIndex}}" name="role{{roleIndex}}"/>
+                  <label for="role{{roleIndex}}">{{role.value.roleName}}</label>
+                </p>
+              </div>
+             </div>
+            </div>
+            <input type="hidden" name="userId" formControlName="userId"/>
+            <div class="row">
+              <div class="col s6 offset-s3" *ngIf="!isStoredUser()">
+                <button class="btn waves-effect col s12" type="submit"
+                (click)="insertUser()">
+							Insert <i class="fa fa-floppy-o right" aria-hidden="true"></i>
+						</button>
+              </div>
+              <div class="col s6 left" *ngIf="isStoredUser()">
+                <button class="btn waves-effect col s12" type="submit"
+                (click)="updateUser()">
+							Update <i class="fa fa-floppy-o right" aria-hidden="true"></i>
+						</button>
+              </div>
+              <div class="col s6 right" *ngIf="isStoredUser()">
+                <button class="btn waves-effect col s12" type="button"
+                (click)="removeUser()">
+							Delete <i class="fa fa-trash right" aria-hidden="true"></i>
+						</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>

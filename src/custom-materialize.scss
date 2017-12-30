@@ -1,0 +1,23 @@
+@import "../node_modules/materialize-css/sass/components/_color";
+// Variables;
+$roboto-font-path: "../node_modules/materialize-css/dist/fonts/roboto/" !default;
+
+// Custom SASS:
+$primary-color: color("blue", "lighten-2") !default;
+$primary-color-light: false !default;
+$primary-color-dark: false !default;
+
+@if not $primary-color-light {
+  $primary-color-light: lighten($primary-color, 15%);
+}
+@if not $primary-color-dark {
+  $primary-color-dark: darken($primary-color, 15%);
+}
+
+$secondary-color: color("amber", "darken-1") !default;
+$success-color: color("green", "base") !default;
+$error-color: color("red", "base") !default;
+$link-color: color("amber", "darken-2") !default;
+
+
+@import "~materialize-css/sass/materialize"

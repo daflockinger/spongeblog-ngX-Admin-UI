@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+
+<div class="parallax-container" *ngIf="post">
+    <div class="parallax" materialize="parallax"></div>
+     <div class="row blog-header">
+      <div class="col s12 m12 l12 center-align">
+      <h1 class="header center white-text">{{post.title}}</h1>
+      </div>
+    </div>
+</div>
+
+<div class="container center-align" style="min-height:1000px;" *ngIf="post">
+<div class="row">
+  <div class="col s12 m12 l12">
+    <div class="card">
+            <div class="card-content left-align">
+              <p class="flow-text" [innerHTML]="post.content">
+              </p>
+            </div>
+            <div class="card-action">
+            </div>
+    </div>
+  </div>
+</div>
+</div>

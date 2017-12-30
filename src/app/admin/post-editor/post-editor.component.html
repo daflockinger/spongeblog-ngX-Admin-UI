@@ -1,0 +1,81 @@
+<div *ngIf="postEditForm" materialize [materializeActions]="toaster">
+  <form [formGroup]="postEditForm" (submit)="savePost()">
+    <div class="row" *ngIf="post">
+      <div class="col s12 m12 l12">
+        <div class="card">
+          <div class="card-content left-align">
+            <span class="card-title">Post Edit</span>
+            <div class="row">
+              <div class="col s8">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" formControlName="title"/>
+                    <label for="title">Title</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6" *ngIf="categories">
+                    <select materialize="material_select" formControlName="categoryid">
+                      <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                    </select>
+                    <label for="categoryid">Category</label>
+                  </div>
+                  <div class="input-field col s6" *ngIf="statuses">
+                    <select materialize="material_select" formControlName="status">
+                      <option *ngFor="let status of statuses" [value]="status.id">{{status.name}}</option>
+                    </select>
+                    <label for="status">Status</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col s4" formArrayName="tags">
+                <h6>Tags</h6>
+                <p *ngFor="let tag of tags; let tagIndex=index" formGroupName="{{tagIndex}}">
+                  <input type="checkbox" formControlName="tagValue" id="tag{{tagIndex}}" name="tag{{tagIndex}}" />
+                  <label for="tag{{tagIndex}}">{{tag.name}}</label>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea formControlName="content" class="materialize-textarea"></textarea>
+              </div>
+              <button class="btn" type="button" (click)="savePost()">
+                <i class="fa fa-save " aria-hidden="true" title="Save"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="parallax-container" *ngIf="post">
+      <div class="parallax" materialize="parallax"></div>
+      <div class="row blog-header" *ngIf="postEditForm">
+        <div class="col s12 m12 l12 center-align">
+          <h1 class="header center white-text">{{postEditForm.value['title']}}</h1>
+          <h5 class="header col s12 white-text">
+            {{post.author.nickName}} / {{post.created | date}}
+            <span *ngFor="let tag of postEditForm.value['tags']">
+              <div class="chip" *ngIf="tag.tagValue">{{tag.name}}</div>
+            </span>
+          </h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="container center-align" style="min-height:1000px;" *ngIf="post">
+      <div class="row">
+        <div class="col s12 m12 l12">
+          <div class="card">
+            <div class="card-content left-align" *ngIf="postEditForm">
+            <p class="flow-text" [innerHTML]="postEditForm.value['content']"></p>
+            </div>
+            <div class="card-action">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

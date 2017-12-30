@@ -1,0 +1,53 @@
+<header>
+<div class="navbar-fixed">
+<nav>
+    <div class="nav-wrapper container">
+      <a [routerLink]="['/admin']" class="brand-logo">Logo</a>
+      <!-- NAV DESKTOP -->
+      <ul class="right hide-on-med-and-down">
+         <li>
+          <a [routerLink]="['/admin']">Settings</a>
+         </li>
+         <li>
+          <a [routerLink]="['/admin/posts']">Posts</a>
+         </li>
+         <li>
+          <a [routerLink]="['/admin/categories']">Categories</a>
+         </li>
+         <li>
+          <a [routerLink]="['/admin/users']">Users</a>
+         </li>
+         <li>
+          <a [routerLink]="['/admin/tags']">Tags</a>
+         </li>
+      </ul>
+      <!-- NAV DESKTOP -->
+      <!-- NAV MOBILE
+      <ul class="side-nav" id="mobile-demo">
+         <li th:each="category : ${categories}">
+         	<a href="#" th:unless="${category.children}" th:href="@{/category/{pathVariable}(pathVariable=${category.link})}" th:text="${category.name}"></a>
+        <ul th:if="${category.children}" class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">
+            <span th:text="${category.name}"></span>
+            <i class="material-icons right">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul>
+              <li>
+                 <a href="#" th:href="@{/category/{pathVariable}(pathVariable=${category.link})}" th:text="${category.name}"></a>
+              </li>
+                <li th:each="child : ${category.children}">
+                  <a href="#" th:href="@{/category/{pathVariable}(pathVariable=${child.link})}" th:text="${child.name}"></a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+		</li>
+      </ul>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+       NAV MOBILE -->
+    </div>
+</nav>
+</div>
+</header>
